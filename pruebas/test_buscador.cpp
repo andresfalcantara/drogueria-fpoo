@@ -30,5 +30,19 @@ int main(){
     // TODO (Grupo 6): inventario vacío, texto vacío, rango invertido (minimo > maximo),
     // límites incluidos, que el orden se conserve, etc.
 
+    SECCION("CBuscador: rango invertido");
+    CHECK_EQ((int)buscador.porRangoPrecio(5000,2000).size(), 0);
+
+    SECCION("CBuscador: se conserva el orden");
+    {
+        vector<CMedicamento> coincidencias = buscador.porNombre("ibu");
+        CHECK_EQ((int)coincidencias.size(), 2);
+        if(coincidencias.size() == 2){
+            CHECK_EQ(coincidencias[0].getId(), 2);
+            CHECK_EQ(coincidencias[1].getId(), 3);
+        }
+    }
+    
+
     return RESUMEN();
 }
